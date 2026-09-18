@@ -1,0 +1,41 @@
+<description datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" xmlns="http://riddl.org/ns/description/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <message name="json">
+    <parameter name="json" mimetype="application/json"/>
+  </message>
+  <message name="xml">
+    <parameter name="xml" mimetype="application/xml"/>
+  </message>
+  <message name="create_stream">
+    <parameter name="uuid" type="string"/>
+  </message>
+
+  <resource>
+    <post out="json"/>
+    <resource relative="instances">
+      <get out="json"/>
+      <resource relative="[a-zA-Z\d_-]+">
+        <resource relative="commits">
+          <get out="json"/>
+          <resource relative="[a-zA-Z\d_-]+">
+            <resource relative="description">
+              <get out="xml"/>
+            </resource>
+            <resource relative="dataelements">
+              <get out="xml"/>
+            </resource>
+            <resource relative="endpoints">
+              <get out="xml"/>
+            </resource>
+            <resource relative="attributes">
+              <get out="xml"/>
+            </resource>
+            <resource relative="testset">
+              <get out="xml"/>
+            </resource>
+          </resource> 
+        </resource> 
+      </resource> 
+    </resource> 
+  </resource>
+</description>
+
