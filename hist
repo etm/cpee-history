@@ -7,13 +7,13 @@ require 'systemu'
 
 def git_commit(history,new,author)
   rp = File.realpath(history)
-  crb = File.join(__dir__,'commit.rb')
+  crb = File.join(__dir__,'commands','commit.rb')
   system 'ruby ' + crb + ' ' + [rp, new, author].shelljoin + ' &'
 end
 
 def get_commits(history,path)
   rp = File.realpath(history)
-  crb = File.join(__dir__,'log.rb')
+  crb = File.join(__dir__,'commands','log.rb')
   res = systemu('ruby ' + crb + ' ' + [rp, path].shelljoin())
   commits = []
   dates = []
@@ -27,12 +27,12 @@ def get_commits(history,path)
       commits.last()[:time] = DateTime.parse(match_date[1])
     end
   }
-  return commits 
+  return commits
 end
 
 def get_file_in_commit(history,path,commit)
   rp = File.realpath(history)
-  crb = File.join(__dir__,'show.rb')
+  crb = File.join(__dir__,'commands','show.rb')
   res = systemu('ruby ' + crb + ' ' + [rp, path,commit].shelljoin())
   return res[1]
 end
@@ -144,7 +144,7 @@ end #}}}
 
 
 Riddl::Server.new(File.dirname(__FILE__) + '/hist.xml') do |opts|
-  
+
   on resource do
     run SaveFromCpeeStream if post
     on resource 'instances' do
